@@ -12,7 +12,8 @@
                     <p class="text-center">Scopri il nostro vasto assortimento di fumetti e inizia la tua avventura!</p>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="{{ route('comics.index') }}" class="btn btn-primary">Esplora i fumetti</a>
+                    <a href="{{ route('comics.create') }}" class="btn btn-primary mt-3">Crea un nuovo fumetto</a>
+                    <a href="{{ route('comics.index') }}" class="btn btn-primary my-3">Esplora i fumetti</a>
                 </div>
             </div>
         </div>

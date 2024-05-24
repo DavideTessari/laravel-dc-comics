@@ -26,21 +26,35 @@ class ComicController extends Controller
 
     public function store(Request $request)
     {
-        // Validazione dei dati
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'thumb' => 'required|url',
-            'price' => 'required|numeric',
-            'series' => 'required',
-            'sale_date' => 'required|date',
-            'type' => 'required'
-        ]);
-
-        // Creazione del fumetto
-        Comic::create($validatedData);
-
-        return redirect()->route('comics.index');
+        $formData = $request->all();
+        $newComic = new Comic();
+        $newComic->fill($formData);
+        $newComic->save();
+    
+        return redirect()->route('comics.show', ['comic' => $newComic->id]);
     }
+
+    public function edit($id)
+    {
+        $comic = Comic::findOrFail($id);
+        
+        $data = [
+            'comic' => $comic
+        ];
+
+        return view('comics.edit', $data);
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $comic = Comic::findOrFail($id);
+        $formData = $request->all();
+        
+        // Aggiornamento dei dati del fumetto
+        $comic->update($formData);
+
+        return redirect()->route('comics.show', ['comic' => $comic->id]);
+    }
+
 
 }
