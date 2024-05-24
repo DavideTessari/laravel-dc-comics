@@ -13,8 +13,9 @@ class ComicController extends Controller
         return view('comics.index', compact('comics'));
     }
 
-    public function show(Comic $comic)
+    public function show($id)
     {
+        $comic = Comic::findOrFail($id);
         return view('comics.show', compact('comic'));
     }
 
@@ -25,6 +26,21 @@ class ComicController extends Controller
 
     public function store(Request $request)
     {
-        
+        // Validazione dei dati
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'thumb' => 'required|url',
+            'price' => 'required|numeric',
+            'series' => 'required',
+            'sale_date' => 'required|date',
+            'type' => 'required'
+        ]);
+
+        // Creazione del fumetto
+        Comic::create($validatedData);
+
+        return redirect()->route('comics.index');
     }
+
 }
