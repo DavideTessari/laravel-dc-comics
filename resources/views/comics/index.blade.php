@@ -13,10 +13,10 @@
                 <p class="card-text"><strong>Series:</strong> {{ $comic->series }}</p>
                 <p class="card-text"><strong>Sale Date:</strong> {{ $comic->sale_date }}</p>
                 <p class="card-text"><strong>Type:</strong> {{ $comic->type }}</p>
-                <a href="{{ route('comics.show', $comic) }}" class="btn btn-primary">View Details</a>
-                <a href="{{ route('comics.edit', $comic) }}" class="btn btn-secondary">Edit</a>
+                <a href="{{ route('comics.show', $comic->id) }}" class="btn btn-primary">View Details</a>
+                <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-secondary">Edit</a>
                 <div class="py-1">
-                    <form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
+                    <form class="delete-form" action="{{ route('comics.destroy', $comic->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger js-delete-btn" data-comic-title="{{ $comic->title }}" type="submit">Delete</button>
@@ -48,5 +48,4 @@
         </div>
     </div>
 </div>
-
 @endsection
