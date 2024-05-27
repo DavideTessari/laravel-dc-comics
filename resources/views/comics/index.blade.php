@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 @section('content')
 <div class="row">
     @foreach ($comics as $comic)
@@ -13,11 +15,13 @@
                 <p class="card-text"><strong>Type:</strong> {{ $comic->type }}</p>
                 <a href="{{ route('comics.show', $comic) }}" class="btn btn-primary">View Details</a>
                 <a href="{{ route('comics.edit', $comic) }}" class="btn btn-secondary">Edit</a>
-                <button class="btn btn-danger js-delete-btn" data-comic-title="{{ $comic->title }}" data-comic-id="{{ $comic->id }}">Delete</button>
-                <form id="delete-form-{{ $comic->id }}" action="{{ route('comics.destroy', $comic->id) }}" method="POST" style="display: none;">
-                    @csrf
-                    @method('DELETE')
-                </form>
+                <div class="py-1">
+                    <form action="{{ route('comics.destroy', $comic->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger js-delete-btn" data-comic-title="{{ $comic->title }}" type="submit">Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
