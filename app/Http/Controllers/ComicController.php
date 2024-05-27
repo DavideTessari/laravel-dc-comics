@@ -56,5 +56,11 @@ class ComicController extends Controller
         return redirect()->route('comics.show', ['comic' => $comic->id]);
     }
 
+    public function destroy($id)
+    {
+        $comic = Comic::findOrFail($id);
+        $comic->delete();
 
+        return redirect()->route('comics.index');
+    }
 }
