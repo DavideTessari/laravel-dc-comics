@@ -1,5 +1,3 @@
-@extends('layouts.app')
-
 @section('content')
 <div class="row">
     @foreach ($comics as $comic)
@@ -15,9 +13,36 @@
                 <p class="card-text"><strong>Type:</strong> {{ $comic->type }}</p>
                 <a href="{{ route('comics.show', $comic) }}" class="btn btn-primary">View Details</a>
                 <a href="{{ route('comics.edit', $comic) }}" class="btn btn-secondary">Edit</a>
+                <button class="btn btn-danger js-delete-btn" data-comic-title="{{ $comic->title }}" data-comic-id="{{ $comic->id }}">Delete</button>
+                <form id="delete-form-{{ $comic->id }}" action="{{ route('comics.destroy', $comic->id) }}" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
             </div>
         </div>
     </div>
     @endforeach
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Il contenuto sarà popolato dinamicamente via JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="modal-confirm-deletion">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
