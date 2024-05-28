@@ -12,7 +12,6 @@
 
     <!-- Styles -->
     @vite('resources/js/app.js')
-
 </head>
 
 <body>
@@ -37,12 +36,6 @@
     <main>
         @yield('content')
     </main>
-
-    <style>
-      *{
-        scrollbar-width: none
-      }
-    </style>
 
 </body>
 
