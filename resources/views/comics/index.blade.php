@@ -25,7 +25,8 @@
         </div>
     </div>
     @endforeach
-</div>
+</div> 
+
 
 <!-- Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
